@@ -31,6 +31,41 @@ public class VarastoTest {
     }
 
     @Test
+    public void konstruktoriToimii() {
+        Varasto uusi = new Varasto(1,0);
+        assertEquals(1, uusi.getTilavuus(), vertailuTarkkuus);
+        uusi = new Varasto(-1, 0);
+        assertEquals(0, uusi.getTilavuus(), vertailuTarkkuus);
+        uusi = new Varasto(0, -1);
+        assertEquals(0, uusi.getSaldo(), vertailuTarkkuus);
+        uusi = new Varasto(-1);
+        assertEquals(0, uusi.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void otaVarastosta() {
+        varasto.lisaaVarastoon(-1);
+        assertEquals(10, varasto.getTilavuus(), vertailuTarkkuus);
+        varasto.otaVarastosta(-1);
+        varasto.lisaaVarastoon(10);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+        varasto.otaVarastosta(100);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void merkkijono() {
+        assertEquals("saldo = 0.0, vielä tilaa 10.0", varasto.toString());
+    }
+
+    @Test
+    public void lisaaLiikaa() {
+        Varasto v = new Varasto(10, 0);
+        v.lisaaVarastoon(100);
+        assertEquals(10, v.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
     public void lisaysLisaaSaldoa() {
         varasto.lisaaVarastoon(8);
 
